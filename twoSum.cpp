@@ -2,7 +2,23 @@
 #include <vector>
 #include <strings.h>
 #include <cassert>
+#include <map>
 
+// Hash map -> O(n) Time & space complexity
+std::vector<int> twoSumBetter(const std::vector<int> &vec, int target)
+{
+    std::map<int, int> valueToIndex;
+
+    for (int i = 0, i < vec.size(), i++)
+    {
+        int current = vec[i];:
+        int x = target - current;
+
+    }
+
+}
+
+// Brute froce -> O(n^2) Time complexity, O(1) Space complexity
 std::vector<int> twoSum(const std::vector<int> &vec, int target)
 {
     std::vector<int> sol;
