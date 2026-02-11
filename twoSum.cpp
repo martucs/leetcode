@@ -3,7 +3,7 @@
 #include <strings.h>
 #include <cassert>
 
-std::vector<int> twoSum(std::vector<int> vec, int target)
+std::vector<int> twoSum(const std::vector<int> &vec, int target)
 {
     std::vector<int> sol;
 
@@ -29,7 +29,7 @@ std::vector<int> twoSum(std::vector<int> vec, int target)
     return (sol);
 }
 
-void printVector(std::vector<int> vec)
+void printVector(const std::vector<int> &vec)
 {
     if (vec.empty())
     {
@@ -46,15 +46,30 @@ void printVector(std::vector<int> vec)
     std::cout << "]" << std::endl;
 }
 
-void    runDebugTest(std::vector<int> nums, int target,  std::vector<int> sol)
+void    runDebugTest(const std::vector<int> &nums, int target, const std::vector<int> &sol)
 {
     std::cout << "target = " << target << std::endl;
-    sol = twoSum(nums, target);
-    if (!sol.empty())
-        printVector(sol);
+    std::vector<int> res;
+
+    res = twoSum(nums, target);
+    if (res.empty())
+    {
+        std::cout << "error: did NOT find solution\n";
+        return ;
+    }
+    if (res == sol)
+    {
+        printVector(res);
+        std::cout << "result is correct!\n\n";
+    }
     else
-        std::cout << "error: did NOT find solution" << std::endl;
-    std::cout << std::endl;
+    {
+        std::cout << " !WARNING: there is a mismatch in results!\n";
+        std::cout << "my result:\n";
+        printVector(res);
+        std::cout << "solution:\n";
+        printVector(sol);
+    }
 }
 
 void    debugTests(void)
@@ -69,7 +84,7 @@ void    debugTests(void)
     int target3= 6;
 
     std::vector<int> nums4 {1,3,3,4};
-    int target4 = 7;
+    int target4 = 5;
 
     std::vector<int> sol = {0,1};
     runDebugTest(nums1, target1, sol);
