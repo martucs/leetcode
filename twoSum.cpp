@@ -2,83 +2,87 @@
 #include <vector>
 #include <strings.h>
 
-std::vector<int> twoSum(std::vector<int> arr, int target)
+std::vector<int> twoSum(std::vector<int> vec, int target)
 {
     std::vector<int> sol;
     
-    bzero(&sol, 2);
     std::cout << "target = " << target << std::endl;
 
-    int i = 0;
-    while (i < 4)
+    size_t i = 0;
+    int base = 0;
+    while ((size_t)base < vec.size() - 1)
     {
-        if (i + 1 < 4 && arr[i] + arr[i + 1] == target)
+        i = 0;
+        std::cout << "base = " << base << std::endl;
+        while (base + i + 1 != vec.size())
         {
-            std::cout << "found solution in i = " << i << std::endl;
-            std::cout << arr[i] << " + " << arr[i + 1] << " = " << arr[i] + arr[i + 1] << std::endl;
-            sol[0] = i;
-            sol[1] = i + 1;
-            return (sol);
+            std::cout << "i = " << i << std::endl;
+            if (vec[base] + vec[base + i + 1] == target)
+            {
+                // std::cout << "found solution in i = " << i << std::endl;
+                // std::cout << vec[i] << " + " << vec[i + 1] << " = " << vec[i] + vec[i + 1] << std::endl;
+                sol.push_back(base);
+                sol.push_back(base + i + 1);
+                return (sol);
+            }
+            i++;
         }
-        i++;
+        base++;
     }
     std::cout << "did NOT find solution" << std::endl;
     return (sol);
 }
 
-void    printArray(std::vector<int> arr, int arrSize)
+void printVector(std::vector<int> vec)
 {
-    if (!arr.empty())
+    std::vector<int>::iterator it = vec.begin();
+    if (vec.empty())
+        std::cout << "vector is empty\n";
+    while (!vec.empty() && it < vec.end())
     {
-        int i = 0;
-        while (i < arrSize)
-        {
-            if (i + 1 != arrSize )
-                std::cout << arr[i] << ",";
-            else
-                std::cout << arr[i];
-            i++;
-        }
-        std::cout << std::endl;
+        std::cout << *it << " ";
+        it++;
     }
-    else
-        std::cout << "vector is empty" << std::endl;
+    std::cout << std::endl;
 }
 
 int main(void)
 {
-    std::vector<int>  nums1;
-    std::vector<int>::iterator  it = nums1.begin();
-    nums1.insert(it, 2);
-    it++;
-    nums1.insert(it, 7);
-    it++;
-    std::cout << "hola" << std::endl;
-    nums1.insert(it, 11);
-    it++;
-    nums1.insert(it, 15);
-
+    std::vector<int> nums1 = {2, 7, 11, 15};
     int target1 = 9;
-    
-    std::vector<int>  nums2;
-    
-    nums2[0] = 3;
-    nums2[1] = 2;
-    nums2[2] = 4;
 
+    std::vector<int> nums2 = {3, 2, 4};
     int target2 = 6;
+    
+    std::vector<int> nums3= {3,3};
+    int target3= 6;
+
+    std::vector<int> nums4 {1,3,3,4};
+    int target4 = 7;
 
     std::vector<int> sol;
-    
-    bzero(&sol, 2);
 
     sol = twoSum(nums1, target1);
     if (!sol.empty())
-        printArray(sol, 2);
+        printVector(sol);
+    
+    std::cout << std::endl;
 
-   sol = twoSum(nums2, target2);
+    sol = twoSum(nums2, target2);
     if (!sol.empty())
-        printArray(sol, 2);
+        printVector(sol);
+   
+    std::cout << std::endl;
+
+    sol = twoSum(nums3 ,target3);
+    if (!sol.empty())
+        printVector(sol);
+
+    std::cout << std::endl;
+
+    sol = twoSum(nums4,target4);
+    if (!sol.empty())
+        printVector(sol);
 
     return (0);
 }
