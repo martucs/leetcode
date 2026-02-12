@@ -3,23 +3,35 @@
 #include <strings.h>
 #include <cassert>
 #include <map>
+#include <unordered_map>
+
+void    printVector(const std::vector<int> &vec);
+void    printMap(std::map<int, int> &map);
+void    printUnorderedMap(std::unordered_map<int, int> &map);
 
 // Hash map -> O(n) Time & space complexity
-std::vector<int> twoSumBetter(const std::vector<int> &vec, int target)
+std::vector<int> twoSum(const std::vector<int> &vec, int target)
 {
-    std::map<int, int> valueToIndex;
+    std::unordered_map<int, int> valueToIndex;
+    std::vector<int> sol;
 
-    for (int i = 0, i < vec.size(), i++)
+    for (size_t i = 0; i < vec.size(); i++)
     {
-        int current = vec[i];:
+        int current = vec[i];
         int x = target - current;
-
+        if (valueToIndex.find(x) != valueToIndex.end())
+        {
+            sol.push_back(valueToIndex[x]);
+            sol.push_back(i);
+            return (sol);
+        }
+        valueToIndex[current] = i;
     }
-
+    return (sol);
 }
 
 // Brute froce -> O(n^2) Time complexity, O(1) Space complexity
-std::vector<int> twoSum(const std::vector<int> &vec, int target)
+/*std::vector<int> twoSum(const std::vector<int> &vec, int target)
 {
     std::vector<int> sol;
 
@@ -43,6 +55,22 @@ std::vector<int> twoSum(const std::vector<int> &vec, int target)
         base++;
     }
     return (sol);
+}*/
+
+void    printMap(std::map<int, int> &map)
+{
+    for (std::map<int, int>::iterator it = map.begin(); it != map.end(); it++)
+    {
+        std::cout << it->first << " = " << it->second << std::endl;
+    }
+}
+
+void    printUnorderedMap(std::unordered_map<int, int> &map)
+{
+    for (std::unordered_map<int, int>::iterator it = map.begin(); it != map.end(); it++)
+    {
+        std::cout << it->first << " = " << it->second << std::endl;
+    }
 }
 
 void printVector(const std::vector<int> &vec)
@@ -144,7 +172,7 @@ void    tests()
 
 int main(void)
 {
-    // debugTests();
+    //  debugTests();
     tests();
     std::cout << "twoSum() passed all tests successfully!\n";
 
