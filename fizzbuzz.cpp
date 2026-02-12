@@ -16,7 +16,7 @@ void printStrVector(const std::vector<std::string> vec)
     std::cout << "]" << std::endl;
 }
 
-
+// O(n) for the initialization and the while loop, O(1) for each iteration
 std::vector<std::string>    fizzbuzz(int n)
 {
     // "FizzBuzz" -> if i is divisible by 3 and 5
@@ -30,7 +30,7 @@ std::vector<std::string>    fizzbuzz(int n)
     int i = 0;
     while (i < n)
     { 
-        if ((i + 1) % 3 == 0 && (i + 1) % 5 == 0)
+        if ((i + 1) % 15 == 0)
             answer[i] =  strings[0];
         else if ((i + 1) % 3 == 0)
             answer[i] =  strings[1];
